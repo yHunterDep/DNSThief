@@ -46,24 +46,24 @@ chmod +x dnsthief
 
 ### 🚀 Run the tool
 ```bash
-./dnsthief -d example.com
+./dnsthief -d yahoo.com
 ```
 
 ### 🧠 Advanced Usage
 
 #### 📚 Using a custom wordlist
 ```bash
-./dnsthief -d example.com -w wordlist.txt
+./dnsthief -d yahoo.com -w wordlist.txt
 ```
 
 #### ⚡ Increase concurrency (faster scans)
 ```bash
-./dnsthief -d example.com -c 100
+./dnsthief -d google.com -c 100
 ```
 
 #### 🔇 Silent mode
 ```bash
-./dnsthief -d example.com -s
+./dnsthief -d yahoo.com -s
 ```
 
 #### 🔗 Pipe via stdin
@@ -74,7 +74,7 @@ cat domains.txt | ./dnsthief
 ### 🧪 Pro Tips
 ```bash
 # Save results to file
-./dnsthief -d example.com > subs.txt
+./dnsthief -d yahoo.com > subs.txt
 
 # Fast recon workflow
 cat domains.txt | ./dnsthief.py -c 50 -s | tee results.txt
@@ -86,7 +86,7 @@ cat domains.txt | ./dnsthief.py -c 50 -s | tee results.txt
 
 ### ⚠️ Notes
 ```bash
-./dnsthief -d example.com
+./dnsthief -d evil.com
 ```
 
 ---
