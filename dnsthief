@@ -30,7 +30,7 @@ parser.add_argument("-c", "--concurrency", help="Set concurrency/workers (Defaul
 parser.add_argument("-s", "--silent", help="Skip banner", action="store_true")
 args = parser.parse_args()
 
-domain_arg = args.domain
+domain_arg = [args.domain]
 if not domain_arg:
 	domain_arg = sys.stdin.read().splitlines()
 
