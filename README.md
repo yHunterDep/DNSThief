@@ -41,40 +41,40 @@ cd dnsthief
 
 ### 🔐 Make it executable
 ```bash
-chmod +x dnsthief.py
+chmod +x dnsthief
 ```
 
 ### 🚀 Run the tool
 ```bash
-./dnsthief.py -d example.com
+./dnsthief -d example.com
 ```
 
 ### 🧠 Advanced Usage
 
 #### 📚 Using a custom wordlist
 ```bash
-./dnsthief.py -d example.com -w wordlist.txt
+./dnsthief -d example.com -w wordlist.txt
 ```
 
 #### ⚡ Increase concurrency (faster scans)
 ```bash
-./dnsthief.py -d example.com -c 100
+./dnsthief -d example.com -c 100
 ```
 
 #### 🔇 Silent mode
 ```bash
-./dnsthief.py -d example.com -s
+./dnsthief -d example.com -s
 ```
 
 #### 🔗 Pipe via stdin
 ```bash
-cat domains.txt | ./dnsthief.py
+cat domains.txt | ./dnsthief
 ```
 
 ### 🧪 Pro Tips
 ```bash
 # Save results to file
-./dnsthief.py -d example.com > subs.txt
+./dnsthief -d example.com > subs.txt
 
 # Fast recon workflow
 cat domains.txt | ./dnsthief.py -c 50 -s | tee results.txt
@@ -86,7 +86,7 @@ cat domains.txt | ./dnsthief.py -c 50 -s | tee results.txt
 
 ### ⚠️ Notes
 ```bash
-python3 dnsthief.py -d example.com
+./dnsthief -d example.com
 ```
 
 ---
