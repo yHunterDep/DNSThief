@@ -35,7 +35,7 @@
 
 ### 📥 Clone the repository
 ```bash
-https://github.com/yHunterDep/DNSThief/ dnsthief
+git clone https://github.com/yHunterDep/DNSThief/ dnsthief
 cd dnsthief
 ```
 
