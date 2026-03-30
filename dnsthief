@@ -1,0 +1,57 @@
+#!/usr/bin/python3
+
+import socket, argparse, sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+banner = """
+░░░░░░░░░░░░░░░▄▄▄▄▄▄▄▄░░░░░░░░░░░░░░
+░▄█▀███▄▄████████████████████▄▄███▀█░
+░█░░▀████████████████████████████░░█░
+░░█▄░░▀████████████████████████░░░▄▀░
+░░░▀█▄▄████▀▀▀░░░░██░░░▀▀▀█████▄▄█▀░░
+░░░▄███▀▀░░░░░░░░░██░░░░░░░░░▀███▄░░░
+░░▄██▀░░░░░▄▄▄██▄▄██░▄██▄▄▄░░░░░▀██▄░
+▄██▀░░░▄▄▄███▄██████████▄███▄▄▄░░░▀█▄
+▀██▄▄██████████▀░███▀▀▀█████████▄▄▄█▀
+░░▀██████████▀░░░███░░░▀███████████▀░
+░░░░▀▀▀██████░░░█████▄░░▀██████▀▀░░░░
+░░░░░░░░░▀▀▀▀▄░░█████▀░▄█▀▀▀░░░░░░░░░
+░░░░░░░░░░░░░░▀▀▄▄▄▄▄▀▀░░░░░░░░░░░░░░
+\tDnsThief v1 🔍
+\tA brute force tool 🔐
+\tMade by HunterDep 🗿
+\tv0.1
+"""
+
+parser = argparse.ArgumentParser(description="Help of DnsThief")
+parser.add_argument("-d", "--domain", help="Put the domain.")
+parser.add_argument("-w", "--wordlist", help="Put the wordlist")
+parser.add_argument("-c", "--concurrency", help="Set concurrency/workers (Default:20)", default=20)
+parser.add_argument("-s", "--silent", help="Skip banner", action="store_true")
+args = parser.parse_args()
+
+domain_arg = args.domain
+if not domain_arg:
+	domain_arg = sys.stdin.read().splitlines()
+
+wordlist = args.wordlist
+concurrency = int(args.concurrency)
+if not wordlist:
+	subdomains = "api apiv1 apiv2 apiv3 api-internal api-public api-private api-gateway api-edge api-core api-auth api-users api-admin api-data api-service api-services api-platform api-prod api-dev api-stage api-test api-beta api-alpha dev dev-api dev-app dev-web dev-admin dev-internal dev-tools devops dev-sec dev-auth dev-db dev-cache dev-worker dev-gateway dev-platform test test-api test-app test-web test-admin test-internal test-auth test-db test-cache test-worker test-gateway test-platform qa qa-api qa-app qa-web qa-admin qa-internal stage staging stage-api stage-app stage-web stage-admin stage-auth stage-db stage-cache stage-worker stage-gateway preprod pre-prod preproduction uat uat-api uat-app uat-web prod production live main app web www m mobile m-api mobile-api frontend backend backoffice office painel dashboard portal console admin admin-panel admin-console admin-dashboard auth login logout signin signup register sso oauth oauth2 saml identity id idp iam access gateway proxy reverse-proxy edge ingress egress lb loadbalancer user users account accounts profile profiles customer customers client clients tenant tenants organization org orgs team teams billing payment payments invoice invoices checkout subscription subscriptions plan plans pricing finance financial order orders cart carts checkout shop store ecommerce commerce catalog product products inventory stock warehouse fulfillment shipping delivery tracking support help helpdesk service-desk servicedesk desk tickets ticket status uptime monitor statuspage health healthcheck ping metrics monitoring observability logs logging log audit audits tracing trace docs doc documentation developer developers dev-portal api-docs swagger openapi redoc wiki knowledgebase kb faq blog news media press content cms cdn static static-assets assets files uploads download downloads images img video videos media-assets data db database databases sql mysql postgres mongodb redis cache cache-api datastore warehouse data-lake datalake analytics reporting reports bi bigdata etl pipeline pipelines stream streaming kafka queue queues worker workers jobs cron scheduler batch processing search elastic elasticsearch solr index indexing query mail email smtp imap pop pop3 webmail mx relay notifications notification notify push websocket ws realtime events event webhooks webhook security secure security-center soc vault secrets secret key keys encryption cert certs ssl tls firewall waf ddos vpn ssh bastion jumpbox internal intranet corp corporate employee hr hrm people payroll recruitment hiring careers jobs partners partner vendors vendor supplier suppliers b2b b2c affiliate affiliates reseller resellers integration integrations integration-api connectors connector bridge middleware servicebus bus sandbox lab labs experiment experiments beta beta-api alpha alpha-api feature flags feature-flags mobile-api ios android app-api client-api public-api private-api internal-api external-api partner-api geo cdn-edge edge1 edge2 edge3 region us eu apac sa br latam backup backups archive archives storage s3 bucket buckets blob blobs object objects ci cd cicd build builds pipeline-ci pipeline-cd deploy deployment deployments release releases version versions git gitlab github bitbucket scm repo repos repository repositories source vpn-gateway remote remote-access access-gateway chat messaging message messages comms communication ai ml model models inference training dataset datasets status-api health-api metrics-api logs-api core platform system systems engine engines service-core service-platform proxy-api gateway-api ingress-api egress-api admin-api internal-api private-api public-api external-api mobile-web webapp web-app singlepage spa pwa cdn-static cdn-media cdn-images cdn-files auth-api user-api billing-api order-api product-api search-api dev1 dev2 dev3 test1 test2 test3 stage1 stage2 stage3 prod1 prod2 prod3 api1 api2 api3 api4 api5 web1 web2 web3 app1 app2 app3 db1 db2 db3 cache1 cache2 cache3 worker1 worker2 worker3 internal1 internal2 internal3 admin1 admin2 admin3 cpanel".split()
+else:
+	subdomains = open(wordlist, "r+").read().split()
+
+if not args.silent:
+	print(banner, file=sys.stderr)
+
+def reqs(subdomain):
+	unido = f"{subdomain}.{domain}"
+	try:
+		ip = socket.gethostbyname(unido)
+		print(unido, flush=True)
+	except:
+		pass
+
+for domain in domain_arg:
+	with ThreadPoolExecutor(max_workers=concurrency) as executor:
+		executor.map(reqs, subdomains)
