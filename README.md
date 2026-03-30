@@ -76,9 +76,6 @@ cat domains.txt | ./dnsthief.py
 # Save results to file
 ./dnsthief.py -d example.com > subs.txt
 
-# Remove duplicates and clean output
-cat subs.txt | sort -u | tee clean.txt
-
 # Fast recon workflow
 cat domains.txt | ./dnsthief.py -c 50 -s | tee results.txt
 ```
