@@ -58,7 +58,7 @@ chmod +x dnsthief
 
 #### ⚡ Increase concurrency (faster scans)
 ```bash
-./dnsthief -d google.com -c 100
+./dnsthief -d google.com -c 70
 ```
 
 #### 🔇 Silent mode
@@ -69,6 +69,7 @@ chmod +x dnsthief
 #### 🔗 Pipe via stdin
 ```bash
 cat domains.txt | ./dnsthief
+echo yahoo.com | ./dnsthief -c 45
 ```
 
 ### 🧪 Pro Tips
@@ -77,17 +78,12 @@ cat domains.txt | ./dnsthief
 ./dnsthief -d yahoo.com > subs.txt
 
 # Fast recon workflow
-cat domains.txt | ./dnsthief.py -c 50 -s | tee results.txt
+cat domains.txt | ./dnsthief.py -c 50 -s | anew results.txt
 ```
 
 ### 🐧 Requirements
 - Python 3.x
 - Linux / macOS / WSL
-
-### ⚠️ Notes
-```bash
-./dnsthief -d evil.com
-```
 
 ---
 
